@@ -9,6 +9,7 @@ import SingleProduct from "./SingleProduct"
 import Cart from "./Cart"
 import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
+import Header from "./components/Header";
 
 
 
@@ -43,6 +44,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <GlobalStyle />
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />}></Route>
