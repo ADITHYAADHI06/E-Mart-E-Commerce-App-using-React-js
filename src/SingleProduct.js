@@ -1,6 +1,5 @@
 import styled from "styled-components";
-
-return <Wrapper></Wrapper>;
+import React from 'react'
 
 const Wrapper = styled.section`
   .container {
@@ -74,5 +73,10 @@ const Wrapper = styled.section`
     padding: 0 2.4rem;
   }
 `;
+const SingleProduct = () => {
+  return <h1>hi</h1>;
+}
 
-export default SingleProduct;
+
+
+export default SingleProduct

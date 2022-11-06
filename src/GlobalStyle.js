@@ -32,7 +32,6 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
- 
   background: #fff;
     border: 5px solid transparent;
     border-radius: 9px;
@@ -82,7 +81,7 @@ li {
 }
 
 
-${"" /* resuable code section  */}
+${"" /* resuable codes section  */}
 
 .container {
   max-width: 120rem;
