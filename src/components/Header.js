@@ -19,14 +19,14 @@ const MainHeader = styled.header`
 
 const Header = () => {
 
-    return (
-        <MainHeader>
-            <NavLink to="/">
-                <img src="/images/logo.png" />
-            </NavLink>
-            <Nav />
-        </MainHeader>
-    )
+  return (
+    <MainHeader>
+      <NavLink to="/">
+        <img src="/images/logo.png" className='logo' />
+      </NavLink>
+      <Nav />
+    </MainHeader>
+  )
 }
 
 export default Header
