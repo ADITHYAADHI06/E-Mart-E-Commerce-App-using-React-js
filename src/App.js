@@ -3,13 +3,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./Home"
 import About from "./About"
 import Contact from "./Contact"
-import Error from "./Error"
 import Products from "./Products"
 import SingleProduct from "./SingleProduct"
 import Cart from "./Cart"
 import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ErrorPage from "./ErrorPage";
 
 
 
@@ -52,8 +53,9 @@ const App = () => {
           <Route path="/products" element={<Products />}></Route>
           <Route path="/singleproduct/:id" element={<SingleProduct />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/error" element={<Error />}></Route>
+          <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );
