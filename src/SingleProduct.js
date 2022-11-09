@@ -74,7 +74,7 @@ const Wrapper = styled.section`
   }
 `;
 const SingleProduct = () => {
-  return <h1>hi</h1>;
+  return <h1>Signle Product</h1>;
 }
 
 
