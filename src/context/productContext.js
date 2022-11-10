@@ -15,6 +15,7 @@ const initialState = {
     featureProducts: [],
 };
 
+// console.log(initialState.featureProducts);
 // Provider for App
 const AppProvider = ({ children }) => {
 

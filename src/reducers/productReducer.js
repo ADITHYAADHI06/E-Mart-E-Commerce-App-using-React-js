@@ -13,7 +13,7 @@ const Reducer = (state, action) => {
                 ...state,
                 isLoading: false,
                 products: action.payload,
-                featuredProducts: featuredProducts,
+                featureProducts: featuredProducts,
                 isError: false
             }
         case "SET_ERROR":

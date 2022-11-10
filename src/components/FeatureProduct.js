@@ -3,7 +3,9 @@ import styled from "styled-components";
 import Product from "./Product";
 
 const FeatureProduct = () => {
-  const { isLoading, featuredProducts } = useProductContext();
+  const { isLoading, featureProducts } = useProductContext();
+
+
   if (isLoading) {
     return <div> ......Loading </div>;
   }
@@ -14,7 +16,7 @@ const FeatureProduct = () => {
         <div className="intro-data">Check Now!</div>
         <div className="common-heading">Our Feature Services</div>
         <div className="grid grid-three-column">
-          {featuredProducts.map((curElem) => {
+          {featureProducts.map((curElem) => {
             return <Product key={curElem.id} {...curElem} />;
           })}
         </div>
