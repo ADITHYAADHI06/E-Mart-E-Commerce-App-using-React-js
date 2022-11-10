@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useParams } from "react-router-dom"
+import { useProductContext } from "./context/productContext";
+const API = "https://api.pujakaitem.com/api/products"
 
 const Wrapper = styled.section`
   .container {
@@ -74,7 +77,18 @@ const Wrapper = styled.section`
   }
 `;
 const SingleProduct = () => {
-  return <h1>Signle Product</h1>;
+
+  const { id } = useParams();
+
+  const { singleproduct, is_signle_Loading, is_single_Error, getSingleProducts } = useProductContext();
+
+  useEffect(() => {
+    getSingleProducts(`${API}?id=${id}`);
+  }, []);
+
+  console.log(singleproduct);
+
+  return <h1>{singleproduct.name}</h1>;
 }
 
 
