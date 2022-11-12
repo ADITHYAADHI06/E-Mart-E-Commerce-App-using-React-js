@@ -5,25 +5,25 @@ import styled from "styled-components";
 const Stars = ({ stars, reviews }) => {
 
 
-    const ratingStar = [...Array(5)].map((_, i) => {
-        let number = i + 0.5;
-        return (
-            <span key={i}>
-                {
-                    stars >= i + 1 ? (<FaStar className="icon" />) : stars >= number ? (<FaStarHalfAlt className="icon" />) : (<AiOutlineStar className="icon" />)
-                }
-            </span>
-        )
-    })
-
+  const ratingStar = [...Array(5)].map((_, i) => {
+    let number = i + 0.5;
     return (
-        <Wrapper>
-            <div className="icon-style">
-                {ratingStar}
-                <p>({reviews} customer reviews)</p>
-            </div>
-        </Wrapper>
-    );
+      <span key={i}>
+        {
+          stars >= i + 1 ? (<FaStar className="icon" />) : stars >= number ? (<FaStarHalfAlt className="icon" />) : (<AiOutlineStar className="icon" />)
+        }
+      </span>
+    )
+  })
+
+  return (
+    <Wrapper>
+      <div className="icon-style">
+        {ratingStar}
+        <p>({reviews} customer reviews)</p>
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
