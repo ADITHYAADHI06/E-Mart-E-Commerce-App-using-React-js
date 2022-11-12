@@ -1,35 +1,52 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa";
-// import CartAmountToggle from "./CartAmountToggle";
-// import { NavLink } from "react-router-dom";
-// import { Button } from "../styles/Button";
+import CartQuantity from "./CartQuantity";
+import { NavLink } from "react-router-dom";
+import { Button } from "../styles/Button";
 
 const AddToCart = ({ singleproduct }) => {
-    const { id, stock, colors } = singleproduct;
+  const { id, stock, colors } = singleproduct;
 
-    const [color, setColor] = useState(colors[0]);
-    return (
+  const [color, setColor] = useState(colors[0]);
 
-        <Wrapper>
-            <div className="colors">
-                <p>colors :
-                    {
-                        colors.map((curColor, i) => {
-                            return (
-                                <button key={i}
-                                    style={{ backgroundColor: curColor }}
-                                    className={curColor === color ? "btnStyle active" : "btnStyle"}
-                                    onClick={() => { setColor(curColor) }}
-                                >
-                                    {curColor === color ? <FaCheck className="checkStyle" /> : null}
-                                </button>
-                            )
-                        })
-                    } </p>
-            </div>
-        </Wrapper>
-    )
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => {
+    stock > quantity ? setQuantity(quantity + 1) : setQuantity(quantity)
+  }
+  const decreaseQuantity = () => {
+    quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1);
+
+  }
+
+  return (
+    <Wrapper>
+      <div className="colors">
+        <p>colors :
+          {
+            colors.map((curColor, i) => {
+              return (
+                <button key={i}
+                  style={{ backgroundColor: curColor }}
+                  className={curColor === color ? "btnStyle active" : "btnStyle"}
+                  onClick={() => { setColor(curColor) }}
+                >
+                  {curColor === color ? <FaCheck className="checkStyle" /> : null}
+                </button>
+              )
+            })
+          } </p>
+      </div>
+
+      {/* Quantity */}
+      <CartQuantity quantity={quantity} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} />
+
+      <NavLink to="/cart">
+        <Button className="btn">Add To Cart</Button>
+      </NavLink>
+    </Wrapper>
+  )
 }
 const Wrapper = styled.section`
   .colors p {

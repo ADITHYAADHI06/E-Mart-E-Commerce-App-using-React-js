@@ -89,7 +89,7 @@ const SingleProduct = () => {
             <div className="product-data-info">
               <p>
                 Available:
-                <span> {stock > 0 ? "In Stock" : "Not Available"}</span>
+                <span style={{ color: stock > 0 ? "green" : "red" }}> {stock > 0 ? "In Stock" : "Not Available"}</span>
               </p>
               {/* <p>
                 ID : <span> {id} </span>
@@ -100,12 +100,12 @@ const SingleProduct = () => {
             </div>
             <hr />
             {
-              stock > 0 && <AddToCart singleproduct={singleproduct} />
+              stock > 0 ? <AddToCart singleproduct={singleproduct} /> : <p className="outOfStock">Out Of Stock</p>
             }
           </div>
         </div>
       </Container>
-    </Wrapper>
+    </Wrapper >
   );
 };
 
@@ -151,6 +151,11 @@ const Wrapper = styled.section`
       }
     }
 
+    .outOfStock{
+             margin: 0 auto;
+            color: red;
+            font-size: 3rem;
+    }
     .product-data-price {
       font-weight: bold;
     }
