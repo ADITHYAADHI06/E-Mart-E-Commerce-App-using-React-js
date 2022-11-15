@@ -10,9 +10,9 @@ const GridView = ({ filter_products }) => {
       <div className='grid grid-three-column'>
         {
           filter_products.map((curElem, i) => {
-            return (<>
+            return (
               <Product key={i}  {...curElem} />
-            </>
+
             )
           })
         }
