@@ -78,6 +78,65 @@ const reducer = (state, action) => {
                 filter_products: newSortData
             }
 
+        case "UPDATE_FILTERS_VALUE":
+            const { name, value } = action.payload
+
+            return {
+                ...state,
+                filters: {
+                    ...state.filters,
+                    [name]: value
+                }
+            }
+        case "FILTER_PRODUCTS":
+            let { all_products } = state;
+            let tempfilterProducts = [...all_products];
+
+            const { SearchText, Categery, Company } = state.filters;
+
+
+            if (SearchText) {
+                tempfilterProducts = tempfilterProducts.filter((curelem) => {
+                    return curelem.name.toLowerCase().includes(SearchText);
+                })
+            }
+            if (Categery) {
+                if (Categery === "All") {
+                    tempfilterProducts = tempfilterProducts.map((curelem) => {
+                        return curelem;
+                    })
+                }
+                else {
+
+                    tempfilterProducts = tempfilterProducts.filter((curelem) => {
+                        return curelem.category === Categery;
+                    })
+                }
+
+            }
+
+            if (Company) {
+                if (Company === "All") {
+                    tempfilterProducts = tempfilterProducts.map((curelem) => {
+                        return curelem;
+                    })
+                }
+                else {
+                    tempfilterProducts = tempfilterProducts.filter((curelem) => {
+                        return curelem.company === Company;
+                    })
+                }
+            }
+
+
+
+
+
+            return {
+                ...state,
+                filter_products: tempfilterProducts
+            }
+
         default: return state
     }
 }
