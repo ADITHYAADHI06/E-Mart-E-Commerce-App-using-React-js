@@ -92,7 +92,7 @@ const reducer = (state, action) => {
             let { all_products } = state;
             let tempfilterProducts = [...all_products];
 
-            const { SearchText, Categery, Company } = state.filters;
+            const { SearchText, Categery, Company, Color } = state.filters;
 
 
             if (SearchText) {
@@ -100,34 +100,30 @@ const reducer = (state, action) => {
                     return curelem.name.toLowerCase().includes(SearchText);
                 })
             }
+
             if (Categery) {
-                if (Categery === "All") {
-                    tempfilterProducts = tempfilterProducts.map((curelem) => {
-                        return curelem;
-                    })
-                }
-                else {
-
+                if (Categery !== "All") {
                     tempfilterProducts = tempfilterProducts.filter((curelem) => {
-                        return curelem.category === Categery;
+                        return curelem.category.toLowerCase() === Categery.toLowerCase();
                     })
                 }
-
             }
 
             if (Company) {
-                if (Company === "All") {
-                    tempfilterProducts = tempfilterProducts.map((curelem) => {
-                        return curelem;
-                    })
-                }
-                else {
+                if (Company !== "All") {
                     tempfilterProducts = tempfilterProducts.filter((curelem) => {
-                        return curelem.company === Company;
+                        return curelem.company.toLowerCase() === Company.toLowerCase();
                     })
                 }
             }
 
+
+            if (Color !== "All") {
+                tempfilterProducts = tempfilterProducts.filter((curelem) => {
+                    return curelem.colors.includes(Color);
+                })
+
+            }
 
 
 
