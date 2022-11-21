@@ -3,10 +3,10 @@ import styled from "styled-components"
 import { FaCheck } from "react-icons/fa";
 import { useFilterContext } from '../context/filterContext'
 import FormatPrice from "../Helpers/FormatPrice"
+import { Button } from "../styles/Button"
 
 const Filter = () => {
-  const { filters: { SearchText, Categery, Color, maxPrice, Price, minPrice }, updateFilterValue, all_products } = useFilterContext();
-
+  const { filters: { SearchText, Categery, Color, maxPrice, Price, minPrice }, updateFilterValue, all_products, ClearFilters } = useFilterContext();
 
   // console.log(Price);
   const unicData = (data, property) => {
@@ -121,6 +121,11 @@ const Filter = () => {
           value={Price}
           onChange={updateFilterValue}
         />
+      </div>
+
+
+      <div className='filter-clear'>
+        <Button className="btn" onClick={ClearFilters}>Clear Filters</Button>
       </div>
 
 
