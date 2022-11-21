@@ -15,7 +15,10 @@ const initialState = {
         SearchText: "",
         Categery: "All",
         Company: "All",
-        Color: "All"
+        Color: "All",
+        minPrice: 0,
+        maxPrice: 0,
+        Price: 0
 
     }
 }
@@ -58,7 +61,7 @@ const FilterProvider = ({ children }) => {
         dispatch({ type: "MAIN_PRODUCTS_LOADING" });
         try {
 
-            dispatch({ type: "filter_All_Data", payload: products });
+            dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
 
         } catch (error) {
             dispatch({ type: "MAIN_PRODUCTS_LOADING_ERROR" });

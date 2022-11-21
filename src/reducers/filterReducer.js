@@ -1,10 +1,20 @@
 const reducer = (state, action) => {
     switch (action.type) {
-        case "filter_All_Data":
+        case "LOAD_FILTER_PRODUCTS":
+
+            let ProductsPrices = action.payload.map(curelem => curelem.price);
+
+            let maxPrice = Math.max(...ProductsPrices);
+
             return {
                 ...state,
                 filter_products: [...action.payload],
                 all_products: [...action.payload],
+                filters: {
+                    ...state.filters,
+                    maxPrice: maxPrice,
+                    Price: maxPrice
+                }
             }
         case "MAIN_PRODUCTS_LOADING":
             return {
@@ -92,7 +102,7 @@ const reducer = (state, action) => {
             let { all_products } = state;
             let tempfilterProducts = [...all_products];
 
-            const { SearchText, Categery, Company, Color } = state.filters;
+            const { SearchText, Categery, Company, Color, Price } = state.filters;
 
 
             if (SearchText) {
@@ -126,6 +136,15 @@ const reducer = (state, action) => {
             }
 
 
+            if (Price === 0) {
+                tempfilterProducts = tempfilterProducts.filter((curelem) => {
+                    return curelem.price = Price;
+                })
+            } else {
+                tempfilterProducts = tempfilterProducts.filter((curelem) => {
+                    return curelem.price <= Price;
+                })
+            }
 
 
             return {

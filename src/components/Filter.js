@@ -2,10 +2,13 @@ import React from 'react'
 import styled from "styled-components"
 import { FaCheck } from "react-icons/fa";
 import { useFilterContext } from '../context/filterContext'
+import FormatPrice from "../Helpers/FormatPrice"
 
 const Filter = () => {
-  const { filters: { SearchText, Categery, Color }, updateFilterValue, all_products } = useFilterContext();
+  const { filters: { SearchText, Categery, Color, maxPrice, Price, minPrice }, updateFilterValue, all_products } = useFilterContext();
 
+
+  // console.log(Price);
   const unicData = (data, property) => {
 
     let newVal = data.map((curElem) => {
@@ -105,6 +108,20 @@ const Filter = () => {
         </div>
       </div>
 
+      <div className="filter_price">
+        <h3>Price</h3>
+        <p>
+          <FormatPrice price={Price} />
+        </p>
+        <input
+          type="range"
+          name="Price"
+          min={minPrice}
+          max={maxPrice}
+          value={Price}
+          onChange={updateFilterValue}
+        />
+      </div>
 
 
     </Wrapper>
