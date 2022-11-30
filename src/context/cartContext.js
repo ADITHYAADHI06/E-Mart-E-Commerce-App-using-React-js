@@ -17,6 +17,7 @@ const CartProvider = ({ children }) => {
         quantity: "",
         max_qantity: "",
         shipping_fee: 50000,
+        price: "",
         image: ""
 
     }

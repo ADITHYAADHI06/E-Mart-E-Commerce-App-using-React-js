@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useCartContext } from "./context/cartContext";
+import CartItem from "./components/subComponents/CartItem";
 
 
 const Cart = () => {
 
   const { cart } = useCartContext();
-  console.log(cart);
 
   return <Wrapper>
     <div className="container">
@@ -18,11 +18,11 @@ const Cart = () => {
       </div>
       <hr />
 
-      {/* <div className="cart-item">
-          {cart.map((curElem) => {
-            return <CartItem key={curElem.id} {...curElem} />;
-          })}
-        </div> */}
+      <div className="cart-item">
+        {cart.map((curElem) => {
+          return <CartItem key={curElem.id} {...curElem} />;
+        })}
+      </div>
     </div>
   </Wrapper>;
 };

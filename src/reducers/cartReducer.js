@@ -10,8 +10,10 @@ const CartReducer = (state, action) => {
                 name: singleproduct.name,
                 quantity: quantity,
                 color: color,
+                price: singleproduct.price,
                 max_qantity: singleproduct.stock,
                 image: singleproduct.image[0].url,
+
             }
             return {
                 ...state,
