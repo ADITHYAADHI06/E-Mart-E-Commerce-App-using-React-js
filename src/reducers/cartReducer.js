@@ -20,6 +20,15 @@ const CartReducer = (state, action) => {
                 cart: [...state.cart, tempCartProduct]
             }
 
+        case "REMOVE_ITEM":
+            let updatedCart = state.cart.filter((curElem) => {
+                return curElem.id !== action.payload;
+            })
+            console.log(updatedCart);
+            return {
+                ...state,
+                cart: updatedCart
+            }
 
         default: return {
             ...state

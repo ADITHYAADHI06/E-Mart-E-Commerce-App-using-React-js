@@ -2,10 +2,10 @@ import React from "react";
 import FormatPrice from "../../Helpers/FormatPrice"
 import CartQuantity from "../CartQuantity";
 import { FaTrash } from "react-icons/fa";
-// import { useCartContext } from "../context/useCartContext";
+import { useCartContext } from "../../context/cartContext";
 
 const CartItem = ({ id, name, quantity, color, max_qantity, image, price }) => {
-    // const { removeItem } = useCartContext();
+    const { removeItem } = useCartContext();
 
     const setDecrease = () => {
         // amount > 1 ? setAmount(amount - 1) : setAmount(1);
@@ -55,7 +55,7 @@ const CartItem = ({ id, name, quantity, color, max_qantity, image, price }) => {
             </div>
             {/* onClick={() => removeItem(id)} */}
             <div>
-                <FaTrash className="remove_icon" />
+                <FaTrash className="remove_icon" onClick={() => { removeItem(id) }} />
             </div>
         </div>
 
