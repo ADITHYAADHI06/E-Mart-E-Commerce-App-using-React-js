@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import FormatPrice from "../../Helpers/FormatPrice"
 import CartQuantity from "../CartQuantity";
 import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../../context/cartContext";
 
-const CartItem = ({ id, name, quantity, color, max_qantity, image, price }) => {
+const CartItem = ({ id, name, quantity, color, stock, image, price }) => {
     const { removeItem } = useCartContext();
-
+    const [amount, setAmount] = useState(quantity);
     const setDecrease = () => {
-        // amount > 1 ? setAmount(amount - 1) : setAmount(1);
+        quantity > 1 ? setAmount(quantity - 1) : setAmount(1);
     };
 
     const setIncrease = () => {
-        // amount < stock ? setAmount(amount + 1) : setAmount(stock);
+        quantity < stock ? setAmount(quantity + 1) : setAmount(stock);
     };
 
     return (
@@ -42,9 +42,9 @@ const CartItem = ({ id, name, quantity, color, max_qantity, image, price }) => {
 
             {/* Quantity  */}
             <CartQuantity
-                quantity={quantity}
-                setDecrease={setDecrease}
-                setIncrease={setIncrease}
+                quantity={amount}
+                decreaseQuantity={setDecrease}
+                increaseQuantity={setIncrease}
             />
 
             {/* //Subtotal */}

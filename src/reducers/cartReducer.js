@@ -11,7 +11,7 @@ const CartReducer = (state, action) => {
                 quantity: quantity,
                 color: color,
                 price: singleproduct.price,
-                max_qantity: singleproduct.stock,
+                stock: singleproduct.stock,
                 image: singleproduct.image[0].url,
 
             }
@@ -29,6 +29,26 @@ const CartReducer = (state, action) => {
                 ...state,
                 cart: updatedCart
             }
+
+        case "CLEAR_CART":
+            return {
+                ...state,
+                cart: []
+            }
+
+        case "CART_TOTAL_ITEM":
+            let updatedValue = state.cart.reduce((initialvalue, curelem) => {
+                let { quantity } = curelem;
+                console.log(quantity);
+                initialvalue += quantity;
+                return initialvalue;
+            }, 0)
+            return {
+                ...state,
+                total_item: updatedValue
+            }
+
+
 
         default: return {
             ...state

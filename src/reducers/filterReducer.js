@@ -105,11 +105,17 @@ const reducer = (state, action) => {
             const { SearchText, Categery, Company, Color, Price } = state.filters;
 
 
+
+
             if (SearchText) {
+
                 tempfilterProducts = tempfilterProducts.filter((curelem) => {
                     return curelem.name.toLowerCase().includes(SearchText);
                 })
+
             }
+
+
 
             if (Categery) {
                 if (Categery !== "All") {

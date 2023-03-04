@@ -9,9 +9,13 @@ const CartProvider = ({ children }) => {
         return dispatch({ type: "ADD_TO_CART", payload: { id, color, quantity, singleproduct } })
     }
 
+    // to clear the cart
+    const clearCart = () => {
+        dispatch({ type: "CLEAR_CART" });
+    };
+
     const getLocalCartData = () => {
         let localCartData = localStorage.getItem("localCart");
-        console.log(localCartData);
         if (localCartData === []) {
             return [];
         } else {
@@ -23,10 +27,10 @@ const CartProvider = ({ children }) => {
         // cart: [],
         cart: getLocalCartData(),
         total_item: "",
-        total_amount: "",
+        total_price: "",
         color: "",
         quantity: "",
-        max_qantity: "",
+        stock: "",
         shipping_fee: 50000,
         price: "",
         image: ""
@@ -40,13 +44,14 @@ const CartProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        // dispatch({ type: "CART_TOTAL_ITEM" });
+        // when cart array get update and at page reload.
+        dispatch({ type: "CART_TOTAL_ITEM" });
         // dispatch({ type: "CART_TOTAL_PRICE" });
         localStorage.setItem("localCart", JSON.stringify(state.cart));
     }, [state.cart]);
 
     return (
-        <cartContext.Provider value={{ ...state, AddToCart, removeItem }}>
+        <cartContext.Provider value={{ ...state, AddToCart, clearCart, removeItem }}>
             {children}
         </cartContext.Provider>);
 }
