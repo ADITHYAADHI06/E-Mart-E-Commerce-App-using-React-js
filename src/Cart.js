@@ -7,8 +7,8 @@ import FormatPrice from "./Helpers/FormatPrice";
 
 const Cart = () => {
 
-  const { cart, clearCart, total_price } = useCartContext();
-  console.log(total_price);
+  const { cart, clearCart, totalCartPrice } = useCartContext();
+  // console.log(totalCartPrice);
   if (cart.length === 0) {
     return (
       <EmptyDiv>
@@ -54,20 +54,20 @@ const Cart = () => {
           <div>
             <p>subtotal:</p>
             <p>
-              <FormatPrice price={total_price} />
+              <FormatPrice price={totalCartPrice} />
             </p>
           </div>
           <div>
             <p>shipping fee:</p>
             <p>
-              <FormatPrice price={500} />
+              <FormatPrice price={30000} />
             </p>
           </div>
           <hr />
           <div>
             <p>order total:</p>
             <p>
-              <FormatPrice price={500 + total_price} />
+              <FormatPrice price={30000 + totalCartPrice} />
             </p>
           </div>
         </div>

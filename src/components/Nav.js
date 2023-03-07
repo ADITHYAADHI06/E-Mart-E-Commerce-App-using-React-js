@@ -7,8 +7,8 @@ import { useCartContext } from "../context/cartContext";
 
 
 const Nav = () => {
-  let { total_item } = useCartContext();
-  // console.log(total_item);
+  let { totalCartItems } = useCartContext();
+  // console.log(totalCartItems);
   const [menuIcon, setMenuIcon] = useState(false);
   const Nav = styled.nav`
     .navbar-lists {
@@ -158,7 +158,7 @@ const Nav = () => {
           <li>
             <NavLink to="/cart" className="navbar-link cart-trolley--link" onClick={() => setMenuIcon(false)}>
               <FiShoppingCart className='cart-trolley' />
-              <span className='cart-total--item'>{total_item}</span>
+              <span className='cart-total--item'>{totalCartItems}</span>
             </NavLink>
           </li>
         </ul>

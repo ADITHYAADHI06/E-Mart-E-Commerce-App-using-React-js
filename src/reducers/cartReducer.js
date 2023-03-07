@@ -118,32 +118,51 @@ const CartReducer = (state, action) => {
     }
 
 
-    if (action.type === "CART_TOTAL_ITEM") {
-        let updatedValue = state.cart.reduce((initialvalue, curelem) => {
-            let { quantity } = curelem;
-            // console.log(quantity);
-            initialvalue += quantity;
-            return initialvalue;
-        }, 0)
+    // if (action.type === "CART_TOTAL_ITEM") {
+    //     let updatedValue = state.cart.reduce((initialvalue, curelem) => {
+    //         let { quantity } = curelem;
+    //         // console.log(quantity);
+    //         initialvalue += quantity;
+    //         return initialvalue;
+    //     }, 0)
+    //     return {
+    //         ...state,
+    //         totalCartItems: updatedValue
+    //     }
+    // }
+
+    // if (action.type === "CART_TOTAL_PRICE") {
+    //     let totalCartPrice = state.cart.reduce((ini, curElem) => {
+    //         ini += curElem.price * curElem.quantity;
+    //         return ini;
+    //     }, 0)
+
+    //     return {
+    //         ...state,
+    //         totalCartPrice: totalCartPrice
+    //     }
+    // }
+
+    if (action.type = "CART_TOTAL_PRICE&ITEMS") {
+
+        let { totalCartItems, totalCartPrice } = state.cart.reduce((accum, curElem) => {
+            let { quantity, price } = curElem;
+
+            accum.totalCartItems += quantity;
+            accum.totalCartPrice += quantity * price;
+            return accum;
+
+        }, {
+            totalCartItems: 0,
+            totalCartPrice: 0
+        })
+
         return {
             ...state,
-            total_item: updatedValue
+            totalCartItems: totalCartItems,
+            totalCartPrice: totalCartPrice,
         }
     }
-
-    if (action.type === "CART_TOTAL_PRICE") {
-        let totalCartPrice = state.cart.reduce((ini, curElem) => {
-            ini += curElem.price * curElem.quantity;
-            return ini;
-        }, 0)
-
-        return {
-            ...state,
-            total_price: totalCartPrice
-        }
-    }
-
-
 
     return state;
 

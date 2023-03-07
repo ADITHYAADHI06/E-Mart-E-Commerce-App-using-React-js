@@ -26,8 +26,8 @@ const CartProvider = ({ children }) => {
     const initialState = {
         // cart: [],
         cart: getLocalCartData(),
-        total_item: "",
-        total_price: "",
+        totalCartItems: "",
+        totalCartPrice: "",
         color: "",
         quantity: "",
         stock: "",
@@ -57,10 +57,12 @@ const CartProvider = ({ children }) => {
 
     useEffect(() => {
         // when cart array get update and at page reload.
-        dispatch({ type: "CART_TOTAL_ITEM" });
+        // dispatch({ type: "CART_TOTAL_ITEM" });
 
         // Total price of all Products
-        dispatch({ type: "CART_TOTAL_PRICE" });
+        // dispatch({ type: "CART_TOTAL_PRICE" });
+
+        dispatch({ type: "CART_TOTAL_PRICE&ITEMS" })
         localStorage.setItem("localCart", JSON.stringify(state.cart));
     }, [state.cart]);
 
