@@ -8,7 +8,6 @@ const CartReducer = (state, action) => {
         })
         // console.log(existingProduct);
 
-
         // already product  exiting in cart.
         if (existingProduct) {
             let updateCart = state.cart.map(curElem => {
@@ -73,6 +72,7 @@ const CartReducer = (state, action) => {
 
     // to Increase Quantity
     if (action.type === "INCREASE_QUANTITY") {
+
         let updatedCart = state.cart.map(curElem => {
             //   updating quantity if curElem macths
             if (curElem.id === action.payload) {
@@ -96,6 +96,7 @@ const CartReducer = (state, action) => {
 
     // to Decrease Quantity
     if (action.type === "DECREASE_QUANTITY") {
+
         let updatedCart = state.cart.map(curElem => {
             //   updating quantity if curElem macths
             if (curElem.id === action.payload) {
@@ -143,7 +144,7 @@ const CartReducer = (state, action) => {
     //     }
     // }
 
-    if (action.type = "CART_TOTAL_PRICE&ITEMS") {
+    if (action.type === "CART_TOTAL_PRICE&ITEMS") {
 
         let { totalCartItems, totalCartPrice } = state.cart.reduce((accum, curElem) => {
             let { quantity, price } = curElem;
