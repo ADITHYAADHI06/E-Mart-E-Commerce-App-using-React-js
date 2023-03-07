@@ -37,21 +37,35 @@ const CartProvider = ({ children }) => {
 
     }
 
+
     const [state, dispatch] = useReducer(reducer, initialState)
 
     const removeItem = (id) => {
         dispatch({ type: "REMOVE_ITEM", payload: id })
     }
 
+    const setDecrease = (id) => {
+        dispatch({ type: "DECREASE_QUANTITY", payload: id })
+
+    };
+    // quantity > 1 ? setAmount(quantity - 1) : setAmount(1);
+    // quantity < stock ? setAmount(quantity + 1) : setAmount(stock);
+
+    const setIncrease = (id) => {
+        dispatch({ type: "INCREASE_QUANTITY", payload: id })
+    };
+
     useEffect(() => {
         // when cart array get update and at page reload.
         dispatch({ type: "CART_TOTAL_ITEM" });
-        // dispatch({ type: "CART_TOTAL_PRICE" });
+
+        // Total price of all Products
+        dispatch({ type: "CART_TOTAL_PRICE" });
         localStorage.setItem("localCart", JSON.stringify(state.cart));
     }, [state.cart]);
 
     return (
-        <cartContext.Provider value={{ ...state, AddToCart, clearCart, removeItem }}>
+        <cartContext.Provider value={{ ...state, AddToCart, clearCart, removeItem, setDecrease, setIncrease }}>
             {children}
         </cartContext.Provider>);
 }

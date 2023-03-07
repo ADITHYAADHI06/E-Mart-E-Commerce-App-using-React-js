@@ -1,8 +1,38 @@
 const CartReducer = (state, action) => {
-    switch (action.type) {
 
-        case "ADD_TO_CART":
-            let { id, color, quantity, singleproduct } = action.payload;
+    if (action.type === "ADD_TO_CART") {
+        let { id, color, quantity, singleproduct } = action.payload;
+
+        let existingProduct = state.cart.find((curElem) => {
+            return curElem.id === id + color;
+        })
+        // console.log(existingProduct);
+
+
+        // already product  exiting in cart.
+        if (existingProduct) {
+            let updateCart = state.cart.map(curElem => {
+                //   updating quantity if curElem macths
+                if (curElem.id === id + color) {
+                    let newQuantity = curElem.quantity + quantity;
+                    if (newQuantity > curElem.stock) {
+                        newQuantity = curElem.stock;
+                    }
+                    return {
+                        ...curElem,
+                        quantity: newQuantity
+                    }
+                }
+                return curElem;
+            })
+
+            return {
+                ...state,
+                cart: updateCart
+            }
+
+
+        } else {        // already product not exiting in cart.
             let tempCartProduct;
 
             tempCartProduct = {
@@ -19,42 +49,106 @@ const CartReducer = (state, action) => {
                 ...state,
                 cart: [...state.cart, tempCartProduct]
             }
-
-        case "REMOVE_ITEM":
-            let updatedCart = state.cart.filter((curElem) => {
-                return curElem.id !== action.payload;
-            })
-            console.log(updatedCart);
-            return {
-                ...state,
-                cart: updatedCart
-            }
-
-        case "CLEAR_CART":
-            return {
-                ...state,
-                cart: []
-            }
-
-        case "CART_TOTAL_ITEM":
-            let updatedValue = state.cart.reduce((initialvalue, curelem) => {
-                let { quantity } = curelem;
-                console.log(quantity);
-                initialvalue += quantity;
-                return initialvalue;
-            }, 0)
-            return {
-                ...state,
-                total_item: updatedValue
-            }
-
-
-
-        default: return {
-            ...state
         }
     }
+
+    if (action.type === "REMOVE_ITEM") {
+        let updatedCart = state.cart.filter((curElem) => {
+            return curElem.id !== action.payload;
+        })
+        console.log(updatedCart);
+        return {
+            ...state,
+            cart: updatedCart
+        }
+    }
+
+
+    if (action.type === "CLEAR_CART") {
+        return {
+            ...state,
+            cart: []
+        }
+    }
+
+    // to Increase Quantity
+    if (action.type === "INCREASE_QUANTITY") {
+        let updatedCart = state.cart.map(curElem => {
+            //   updating quantity if curElem macths
+            if (curElem.id === action.payload) {
+                let newQuantity = curElem.quantity + 1;
+                if (newQuantity > curElem.stock) {
+                    newQuantity = curElem.stock;
+                }
+                return {
+                    ...curElem,
+                    quantity: newQuantity
+                }
+            }
+            return curElem;
+        })
+
+        return {
+            ...state,
+            cart: updatedCart
+        }
+    }
+
+    // to Decrease Quantity
+    if (action.type === "DECREASE_QUANTITY") {
+        let updatedCart = state.cart.map(curElem => {
+            //   updating quantity if curElem macths
+            if (curElem.id === action.payload) {
+                let newQuantity = curElem.quantity - 1;
+                if (newQuantity < 1) {
+                    newQuantity = 1;
+                }
+                return {
+                    ...curElem,
+                    quantity: newQuantity
+                }
+            }
+            return curElem;
+        })
+
+        return {
+            ...state,
+            cart: updatedCart
+        }
+    }
+
+
+    if (action.type === "CART_TOTAL_ITEM") {
+        let updatedValue = state.cart.reduce((initialvalue, curelem) => {
+            let { quantity } = curelem;
+            // console.log(quantity);
+            initialvalue += quantity;
+            return initialvalue;
+        }, 0)
+        return {
+            ...state,
+            total_item: updatedValue
+        }
+    }
+
+    if (action.type === "CART_TOTAL_PRICE") {
+        let totalCartPrice = state.cart.reduce((ini, curElem) => {
+            ini += curElem.price * curElem.quantity;
+            return ini;
+        }, 0)
+
+        return {
+            ...state,
+            total_price: totalCartPrice
+        }
+    }
+
+
+
+    return state;
+
 }
+
 
 
 export default CartReducer;

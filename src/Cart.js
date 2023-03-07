@@ -3,11 +3,12 @@ import { useCartContext } from "./context/cartContext";
 import CartItem from "./components/subComponents/CartItem";
 import { NavLink } from "react-router-dom";
 import { Button } from "./styles/Button";
+import FormatPrice from "./Helpers/FormatPrice";
 
 const Cart = () => {
 
-  const { cart, clearCart } = useCartContext();
-
+  const { cart, clearCart, total_price } = useCartContext();
+  console.log(total_price);
   if (cart.length === 0) {
     return (
       <EmptyDiv>
@@ -43,9 +44,35 @@ const Cart = () => {
             clear cart
           </Button>
         </div>
-
-
       </div>
+
+
+
+      {/* order total_amount */}
+      <div className="order-total--amount">
+        <div className="order-total--subdata">
+          <div>
+            <p>subtotal:</p>
+            <p>
+              <FormatPrice price={total_price} />
+            </p>
+          </div>
+          <div>
+            <p>shipping fee:</p>
+            <p>
+              <FormatPrice price={500} />
+            </p>
+          </div>
+          <hr />
+          <div>
+            <p>order total:</p>
+            <p>
+              <FormatPrice price={500 + total_price} />
+            </p>
+          </div>
+        </div>
+      </div>
+
     </Wrapper>;
   }
 };

@@ -5,15 +5,8 @@ import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../../context/cartContext";
 
 const CartItem = ({ id, name, quantity, color, stock, image, price }) => {
-    const { removeItem } = useCartContext();
-    const [amount, setAmount] = useState(quantity);
-    const setDecrease = () => {
-        quantity > 1 ? setAmount(quantity - 1) : setAmount(1);
-    };
+    const { removeItem, setDecrease, setIncrease } = useCartContext();
 
-    const setIncrease = () => {
-        quantity < stock ? setAmount(quantity + 1) : setAmount(stock);
-    };
 
     return (
         <div className='grid grid-five-column'>
@@ -42,7 +35,8 @@ const CartItem = ({ id, name, quantity, color, stock, image, price }) => {
 
             {/* Quantity  */}
             <CartQuantity
-                quantity={amount}
+                quantity={quantity}
+                id={id}
                 decreaseQuantity={setDecrease}
                 increaseQuantity={setIncrease}
             />

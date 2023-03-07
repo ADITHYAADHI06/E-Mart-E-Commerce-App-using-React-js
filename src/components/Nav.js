@@ -8,7 +8,7 @@ import { useCartContext } from "../context/cartContext";
 
 const Nav = () => {
   let { total_item } = useCartContext();
-  console.log(total_item);
+  // console.log(total_item);
   const [menuIcon, setMenuIcon] = useState(false);
   const Nav = styled.nav`
     .navbar-lists {
